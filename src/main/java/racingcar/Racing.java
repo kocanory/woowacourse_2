@@ -73,12 +73,16 @@ public class Racing {
 
     public void eachRound() {
         for (String key : cars.keySet()) {
-            if (enableForward()) {
-                cars.put(key, cars.get(key) + "-");
-            }
-            System.out.println(key + " : " + cars.get(key));
+            checkCarForward(key);
         }
         System.out.println();
+    }
+
+    public void checkCarForward(String key) {
+        if (enableForward()) {
+            cars.put(key, cars.get(key) + "-");
+        }
+        System.out.println(key + " : " + cars.get(key));
     }
 
     public boolean enableForward() {
@@ -106,15 +110,20 @@ public class Racing {
         });
     }
 
+    public void checkWinner(List<String> winner, String r) {
+        if (cars.get(rank.get(0)).length() == cars.get(r).length()) {
+            winner.add(r);
+        } else {
+            return;
+        }
+    }
+
     public void printWinner() {
+        sortMap();
         System.out.print("최종 우승자 : ");
         List<String> winner = new ArrayList<>();
         for (String r : rank) {
-            if (cars.get(rank.get(0)).length() == cars.get(r).length()) {
-                winner.add(r);
-                continue;
-            }
-            break;
+            checkWinner(winner, r);
         }
         String win = String.join(", ", winner);
         System.out.println(win);
@@ -124,7 +133,6 @@ public class Racing {
         inputRacingCar();
         inputRacingRound();
         allRound();
-        sortMap();
         printWinner();
     }
 }
