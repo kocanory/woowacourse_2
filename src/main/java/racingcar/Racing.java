@@ -37,8 +37,15 @@ public class Racing {
         cars = new LinkedHashMap<>();
         String[] split = input.split(",");
         for (String name : split) {
+            checkNameLength(name);
             checkDuplicateCar(name);
             cars.put(name, "");
+        }
+    }
+
+    public void checkNameLength(String name) {
+        if (name.length() > 5) {
+            throw new IllegalArgumentException();
         }
     }
 
@@ -53,6 +60,7 @@ public class Racing {
         String round = Console.readLine();
         checkNullInputRound(round);
         checkIntegerRound(round);
+        checkZeroRound();
     }
 
     public void checkNullInputRound(String round) {
@@ -69,6 +77,12 @@ public class Racing {
             throw new IllegalArgumentException();
         }
 
+    }
+
+    public void checkZeroRound() {
+        if (racingRound == 0) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public void eachRound() {
