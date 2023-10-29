@@ -15,8 +15,8 @@ public class Racing {
     public void inputRacingCar() {
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String input = inputCarName();
-        input = deleteSpace(input);
         checkNullInputCar(input);
+        input = deleteSpace(input);
         checkSpecialCharacter(input);
         splitRacingCar(input);
     }
@@ -112,10 +112,7 @@ public class Racing {
 
     public boolean enableForward() {
         int number = Randoms.pickNumberInRange(0, 9);
-        if (number >= 4) {
-            return true;
-        }
-        return false;
+        return number >= 4;
     }
 
     public void allRound() {
