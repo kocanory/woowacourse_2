@@ -143,20 +143,22 @@ public class Racing {
     public void checkWinner(List<String> winner, String r) {
         if (cars.get(rank.get(0)).length() == cars.get(r).length()) {
             winner.add(r);
-        } else {
-            return;
         }
+    }
+
+    public List<String> makeWinnerList() {
+        List<String> winner = new ArrayList<>();
+        for (String r : rank) {
+            checkWinner(winner, r);
+        }
+        return winner;
     }
 
     public void printWinner() {
         sortMap();
         System.out.print("최종 우승자 : ");
-        List<String> winner = new ArrayList<>();
-        for (String r : rank) {
-            checkWinner(winner, r);
-        }
-        String win = String.join(", ", winner);
-        System.out.println(win);
+        makeWinnerList();
+        System.out.println(String.join(", ", makeWinnerList()));
     }
 
     public void run() {
